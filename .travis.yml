@@ -8,4 +8,3 @@ script:
   - flake8 .
   - pylint fishes pool config test_pool main
   - mypy .
-  - codecov

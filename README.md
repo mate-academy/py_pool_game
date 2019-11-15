@@ -10,3 +10,17 @@ The task that needs to be solved is simple: you need to add a new species of pre
 }
 Also, the size of the pool should be increased to 20x20.
 The main difficulty of this task is to satisfy all quality checks.
+
+To deploy project on your local machine create new virtual environment and execute this command:
+
+`pip install -r requirements.txt`
+
+To run all style checkers and tests use commands:
+
+`pytest --cov=pool`
+
+`flake8 .`
+
+`pylint fishes pool config test_pool main`
+
+`mypy .`
