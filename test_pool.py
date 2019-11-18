@@ -9,13 +9,14 @@ class TestPool(unittest.TestCase):
         self.p = pool.Pool()
 
     def test_pool(self):
-        self.assertEqual(self.p.get_size(), (10, 10), "Pool size doesn't equal 10x10")
+        self.assertEqual(
+            self.p.get_size(), (10, 10), "Pool size doesn't equal 10x10")
 
     def test_fill_predators(self):
         PREDATORS_QUANTITY = 3
-        l = len(self.p._fishes)
+        fises_len = len(self.p._fishes)
         self.p.fill(fishes.Predator, PREDATORS_QUANTITY)
-        self.assertEqual(len(self.p._fishes), l + PREDATORS_QUANTITY)
+        self.assertEqual(len(self.p._fishes), fises_len + PREDATORS_QUANTITY)
 
     @unittest.mock.patch('random.randint')
     def test_fill_predators_random(self, m):
@@ -78,6 +79,7 @@ class TestPredator(unittest.TestCase):
         p.fill(fishes.Victim, 1)
         p._fishes[0].eat(p)
         self.assertEqual(len(p._fishes), 1)
+
 
 class TestVictim(unittest.TestCase):
     def test_victim(self):

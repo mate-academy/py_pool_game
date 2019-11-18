@@ -1,5 +1,5 @@
-import os
 import random
+import types
 
 import config
 
@@ -11,13 +11,14 @@ POOL_HEIGHT = int(config.config['Pool']['Height'])
 
 class Pool:
     def __init__(self):
-        self._width = POOL_WIDTH; self._height = POOL_HEIGHT
+        self._width = POOL_WIDTH
+        self._height = POOL_HEIGHT
         self._fishes = []
 
-    def get_size(pool):
-        return pool._width, pool._height
+    def get_size(self,):
+        return self._width, self._height
 
-    def fill(self, fish_type:int, number:int):
+    def fill(self, fish_type, number: int):
         self._fishes += [fish_type(
             random.randint(0, self._width - 1),
             random.randint(0, self._height - 1)
@@ -46,15 +47,16 @@ class Pool:
                 fish.born(self)
 
     def get_nearest_victim(self, x, y):
-        nearest_victims = [fish.get_pos() for fish in self._fishes if fish.is_victim()]
+        nearest_victims = [fish.get_pos()
+                           for fish in self._fishes if fish.is_victim()]
         if not nearest_victims:
-            return (0, 0)
-        return tuple(min(nearest_victims, key=lambda f: math.hypot(f[0] - x, f[1] - y)))
+            return 0, 0
+        return tuple(min(
+            nearest_victims, key=lambda f: math.hypot(f[0] - x, f[1] - y)))
 
     def get_victim(self, pos):
-        return [fish for fish in self._fishes if fish.get_pos() == pos and fish.is_victim()]
+        return [fish for fish in self._fishes
+                if fish.get_pos() == pos and fish.is_victim()]
 
     def kill(self, victim):
         self._fishes.remove(victim)
-
-
