@@ -1,29 +1,51 @@
-import os
+"""
+  Z name main
+  Nain jjk.
+"""
 import random
-
 import config
-
 import math
 
-POOL_WIDTH = int(config.config['Pool']['Width'])
-POOL_HEIGHT = int(config.config['Pool']['Height'])
+POOL_WIDTH = int(config.CONFIG['Pool']['Width'])
+POOL_HEIGHT = int(config.CONFIG['Pool']['Height'])
 
 
 class Pool:
+    """
+      Z name main
+      Nain jjk.
+      """
     def __init__(self):
-        self._width = POOL_WIDTH; self._height = POOL_HEIGHT
+        """
+          Z name main
+          Nain jjk.
+          """
+        self._width = POOL_WIDTH
+        self._height = POOL_HEIGHT
         self._fishes = []
 
     def get_size(pool):
+        """
+          Z name main
+          Nain jjk.
+          """
         return pool._width, pool._height
 
-    def fill(self, fish_type:int, number:int):
-        self._fishes += [fish_type(
-            random.randint(0, self._width - 1),
-            random.randint(0, self._height - 1)
-        ) for _ in range(number)]
+    def fill(self, fish_type, number: int):
+        """
+          Z name main
+          Nain jjk.
+          """
+        self._fishes += [fish_type(random.randint(0, self._width - 1),
+                                   random.randint(0, self._height - 1))
+                         for _ in range(number)]
+
 
     def __str__(self):
+        """
+          Z name main
+          Nain jjk.
+          """
         s = '+' + '-'*self._width + '+\n'
         p = [[' ']*self._width for _ in range(self._height)]
         for fish in self._fishes:
@@ -34,6 +56,10 @@ class Pool:
         return s
 
     def tick(self):
+        """
+          Z name main
+          Nain jjk.
+          """
         for fish in self._fishes:
             fish.move(self)
             fish.eat(self)
@@ -46,15 +72,29 @@ class Pool:
                 fish.born(self)
 
     def get_nearest_victim(self, x, y):
-        nearest_victims = [fish.get_pos() for fish in self._fishes if fish.is_victim()]
+        """
+          Z name main
+          Nain jjk.
+          """
+        nearest_victims = [fish.get_pos()
+                           for fish in self._fishes if fish.is_victim()]
+
         if not nearest_victims:
             return (0, 0)
-        return tuple(min(nearest_victims, key=lambda f: math.hypot(f[0] - x, f[1] - y)))
+        return tuple(min(nearest_victims, key=lambda f: math.hypot(f[0] - x,
+                                                                   f[1] - y)))
 
     def get_victim(self, pos):
-        return [fish for fish in self._fishes if fish.get_pos() == pos and fish.is_victim()]
+        """
+          Z name main
+          Nain jjk.
+          """
+        return [fish for fish in self._fishes
+                if fish.get_pos() == pos and fish.is_victim()]
 
     def kill(self, victim):
+        """
+          Z name main
+          Nain jjk.
+          """
         self._fishes.remove(victim)
-
-

@@ -1,9 +1,18 @@
+"""
+  Z name main
+  Nain jjk.
+"""
 import configparser
 
 
-config = configparser.ConfigParser()
-config.read('pool.ini')
+
+CONFIG = configparser.ConfigParser()
+CONFIG.read('pool.ini')
 
 
 def get_ticks():
-    return int(config['App']['Ticks'])
+    """
+      Z name main
+      Nain jjk.
+    """
+    return int(CONFIG['App']['Ticks'])
