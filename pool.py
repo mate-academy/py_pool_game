@@ -23,10 +23,6 @@ class Pool:
         '''def'''
         return self._fishes
 
-    def set_fishes(self, fishes):
-        '''def'''
-        self._fishes = fishes
-
     def fill(self, fish_type, number: int):
         '''def'''
         self._fishes += [fish_type(
