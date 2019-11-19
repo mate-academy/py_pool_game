@@ -21,10 +21,9 @@ class Fish:
         return self._pos
 
     def move(self, poo: pool.Pool) -> tuple:
-        """moving"""
+        '''def'''
         self._life_counter -= 1
-        self._move(poo)
-        self.place_in_bounds(poo)
+        return self._move(poo), self.place_in_bounds(poo)
 
     def is_alive(self):
         """live or dead"""
@@ -61,8 +60,9 @@ class Predator(Fish):
         super().__init__(x, y)
         self.__dict__.update(self.state)
 
-    def _move(self, poo: pool.Pool = None):
-        """move"""
+    def _move(self, poo=None):
+        if poo is None:
+            poo = []
         self._is_not_hungry -= 1
         victim = poo.get_nearest_victim(*self._pos)
         self._pos[X] += 2 if victim[X] > self._pos[X] else -2
