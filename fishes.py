@@ -1,4 +1,4 @@
-import random
+""" Docstring """
 import json
 import random
 
@@ -8,6 +8,8 @@ X, Y = 0, 1
 
 
 class Fish:
+    """ Docstring """
+
     def __init__(self, x, y):
         self._pos = [x, y]
         self._life_counter = 10
@@ -16,40 +18,42 @@ class Fish:
         self._is_not_hungry = 0
 
     def get_pos(self):
+        """ Docstring """
         return self._pos
 
-    def move(self, p: pool.Pool) -> tuple:
+    def move(self, pll: pool.Pool):
+        """ Docstring """
         self._life_counter -= 1
-        self._move(p)
-        self.place_in_bounds(p)
+        return self._move(pll), self.place_in_bounds(pll)
 
     def is_alive(self):
+        """ Docstring """
         return self._life_counter > 0
 
-    def _move(self, p: pool.Pool):
+    def _move(self, pll: pool.Pool):
         pass
 
-    def is_victim(self) -> bool:
-        return False
+    is_victim = False
 
-    def place_in_bounds(self, p: list):
+    def place_in_bounds(self, place: pool.Pool):
+        """ Docstring """
         try:
-            self._pos[X] = min(max(self._pos[X], 0), p.get_size()[X] - 1)
-            self._pos[Y] = min(max(self._pos[Y], 0), p.get_size()[Y] - 1)
-        except Exception:
-            pass
+            self._pos[X] = min(max(self._pos[X], 0), place.get_size()[X] - 1)
+            self._pos[Y] = min(max(self._pos[Y], 0), place.get_size()[Y] - 1)
         except ValueError:
             print("Oooops!")
 
-    def eat(self, p: pool.Pool):
-        pass
+    def eat(self, pll: pool.Pool):
+        """ Docstring """
 
-    def born(self, p: pool.Pool):
+    def born(self, pll: pool.Pool):
+        """ Docstring """
         if random.randint(1, 10) < self._born_rate:
-            p.fill(self.__class__, self._born_num)
+            pll.fill(self.__class__, self._born_num)
 
 
 class Predator(Fish):
+    """ Docstring """
     with open("predator.json", 'rt') as f:
         state = json.load(f)
 
@@ -60,20 +64,19 @@ class Predator(Fish):
         super().__init__(x, y)
         self.__dict__.update(self.state)
 
-    def _move(self, p: pool.Pool=[]):
+    def _move(self, pll: pool.Pool):
         self._is_not_hungry -= 1
-        victim = p.get_nearest_victim(*self._pos)
-        self._pos[X]+= 2 if victim[X]>self._pos[X] else -2
-        self._pos[Y]+= 2 if victim[Y]>self._pos[Y] else -2
+        victim = pll.get_nearest_victim(*self._pos)
+        self._pos[X] += 2 if victim[X] > self._pos[X] else -2
+        self._pos[Y] += 2 if victim[Y] > self._pos[Y] else -2
 
-    def eat(self, p: pool.Pool) -> int:
-        """
-        """
-        victims = p.get_victim(self.get_pos())
+    def eat(self, pll: pool.Pool):
+        """ Docstring """
+        victims = pll.get_victim(self.get_pos())
         if victims:
             self._is_not_hungry += 3
             for victim in victims:
-                p.kill(victim)
+                pll.kill(victim)
 
     def __repr__(self):
         return "P"
@@ -83,6 +86,8 @@ class Predator(Fish):
 
 
 class Victim(Fish):
+    """ Docstring """
+
     with open("victim.json", 'rt') as f:
         state = json.load(f)
 
@@ -90,11 +95,23 @@ class Victim(Fish):
         super().__init__(x, y)
         self.__dict__.update(self.state)
 
-    def _move(self, p: pool.Pool):
-        self._pos[X] += random.randint(-1,1)
-        self._pos[Y] += random.randint(-1,1)
+    def _move(self, pll: pool.Pool):
+        self._pos[X] += random.randint(-1, 1)
+        self._pos[Y] += random.randint(-1, 1)
 
     def __repr__(self):
         return "V"
 
-    is_victim = lambda self: True
+    is_victim = True
+
+
+class Pike(Predator):
+    """
+    Class Pike
+    """
+
+    with open("pike.json", 'rt') as f:
+        state = json.load(f)
+
+    with open('pike.json', 'rt') as f:
+        pike_state = json.load(f)
