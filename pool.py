@@ -51,7 +51,7 @@ class Pool:
     def get_nearest_victim(self, coordx, coordy):
         """ Docstring """
         nearest_victims = [fish.get_pos() for fish in self.fishes
-                           if fish.is_victim()]
+                           if fish.is_victim]
         if not nearest_victims:
             return (0, 0)
         return tuple(min(nearest_victims,
@@ -61,7 +61,7 @@ class Pool:
     def get_victim(self, pos):
         """ Docstring """
         return [fish for fish in self.fishes
-                if fish.get_pos() == pos and fish.is_victim()]
+                if fish.get_pos() == pos and fish.is_victim]
 
     def kill(self, victim):
         """ Docstring """

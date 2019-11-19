@@ -21,14 +21,10 @@ class Fish:
         """ Docstring """
         return self._pos
 
-    def get_size(self):
-        pass
-
     def move(self, pll: pool.Pool):
         """ Docstring """
         self._life_counter -= 1
-        self._move(pll)
-        self.place_in_bounds(pll)
+        return self._move(pll), self.place_in_bounds(pll)
 
     def is_alive(self):
         """ Docstring """
@@ -37,11 +33,9 @@ class Fish:
     def _move(self, pll: pool.Pool):
         pass
 
-    def is_victim(self) -> bool:
-        """Docstring"""
-        return False
+    is_victim = False
 
-    def place_in_bounds(self, place: list):
+    def place_in_bounds(self, place: pool.Pool):
         """ Docstring """
         try:
             self._pos[X] = min(max(self._pos[X], 0), place.get_size()[X] - 1)
@@ -108,8 +102,7 @@ class Victim(Fish):
     def __repr__(self):
         return "V"
 
-    def is_victim(self) -> bool:
-        return True
+    is_victim = True
 
 
 class Pike(Predator):
