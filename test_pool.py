@@ -108,7 +108,7 @@ class TestVictim(unittest.TestCase):
 
     @unittest.mock.patch('random.randint')
     def test_victim_correct_move(self, mmm):
-        """docstring"""
+        """docstring """
         vcc = fishes.Victim(2, 3)
         mmm.side_effect = 1, 1
         vcc.move(pool.Pool())

@@ -7,5 +7,5 @@ CONFIG.read('pool.ini')
 
 
 def get_ticks():
-    """return"""
+    """return """
     return int(CONFIG['App']['Ticks'])
