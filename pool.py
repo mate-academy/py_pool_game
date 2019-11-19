@@ -18,7 +18,7 @@ class Pool:
         """ Docstring """
         return self._width, self._height
 
-    def fill(self, fish_type: int, number: int):
+    def fill(self, fish_type, number: int):
         """ Docstring """
         self.fishes += [fish_type(
             random.randint(0, self._width - 1),

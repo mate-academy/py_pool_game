@@ -1,7 +1,6 @@
 """ doc main """
 import pool
 import fishes
-
 import config
 
 if __name__ == '__main__':

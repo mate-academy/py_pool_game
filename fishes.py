@@ -10,8 +10,6 @@ X, Y = 0, 1
 class Fish:
     """ Docstring """
 
-    # is_victim = False
-
     def __init__(self, x, y):
         self._pos = [x, y]
         self._life_counter = 10
@@ -23,7 +21,10 @@ class Fish:
         """ Docstring """
         return self._pos
 
-    def move(self, pll: pool.Pool) -> tuple:
+    def get_size(self):
+        pass
+
+    def move(self, pll: pool.Pool):
         """ Docstring """
         self._life_counter -= 1
         self._move(pll)
@@ -37,7 +38,7 @@ class Fish:
         pass
 
     def is_victim(self) -> bool:
-        """ Docstring """
+        """Docstring"""
         return False
 
     def place_in_bounds(self, place: list):
@@ -92,8 +93,6 @@ class Predator(Fish):
 
 class Victim(Fish):
     """ Docstring """
-
-    # is_victim = True
 
     with open("victim.json", 'rt') as f:
         state = json.load(f)
