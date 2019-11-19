@@ -19,7 +19,7 @@ class Pool:
 
     def get_size(pool):
         """get size"""
-        return pool._width, pool._height
+        return pool._width * 2, pool._height * 2
 
     def fill(self, fish_type, number: int):
         """ fill"""

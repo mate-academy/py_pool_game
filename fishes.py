@@ -26,7 +26,6 @@ class Fish:
         self._move(poo)
         self.place_in_bounds(poo)
 
-
     def is_alive(self):
         """live or dead"""
         return self._life_counter > 0

@@ -13,8 +13,8 @@ class TestPool(unittest.TestCase):
 
     def test_pool(self):
         """docstring"""
-        self.assertEqual(self.poo.get_size(), (10, 10),
-                         "Pool size doesn't equal 10x10")
+        self.assertEqual(self.poo.get_size(), (20, 20),
+                         "Pool size doesn't equal 20x20")
 
     def test_fill_predators(self):
         """docstring"""
@@ -56,9 +56,10 @@ class TestFish(unittest.TestCase):
 
     def test_fish_is_in_bounds2(self):
         """docstring"""
-        vcc = fishes.Fish(10, 10)
+        vcc = fishes.Fish(20, 20)
         vcc.place_in_bounds(pool.Pool())
-        self.assertEqual(vcc.get_pos(), [9, 9])
+
+        self.assertEqual(vcc.get_pos(), [19, 19])
 
 
 class TestPredator(unittest.TestCase):
