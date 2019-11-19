@@ -19,16 +19,16 @@ class TestPool(unittest.TestCase):
     def test_fill_predators(self):
         """docstring"""
         predators_quantity = 3
-        leng = len(self.poo._fishes)
+        leng = len(self.poo.fishes)
         self.poo.fill(fishes.Predator, predators_quantity)
-        self.assertEqual(len(self.poo._fishes), leng + predators_quantity)
+        self.assertEqual(len(self.poo.fishes), leng + predators_quantity)
 
     @unittest.mock.patch('random.randint')
     def test_fill_predators_random(self, mmm):
         """docstring"""
         mmm.side_effect = 0, 1
         self.poo.fill(fishes.Predator, 1)
-        self.assertEqual(self.poo._fishes[0].get_pos(), [0, 1])
+        self.assertEqual(self.poo.fishes[0].get_pos(), [0, 1])
 
     @unittest.mock.patch('random.randint')
     def test_nearest_victim(self, mmm):
@@ -43,7 +43,7 @@ class TestPool(unittest.TestCase):
         """docstring"""
         mmm.side_effect = 1, 1
         self.poo.fill(fishes.Victim, 1)
-        self.assertEqual(self.poo.get_victim([1, 1]), [self.poo._fishes[0]])
+        self.assertEqual(self.poo.get_victim([1, 1]), [self.poo.fishes[0]])
 
 
 class TestFish(unittest.TestCase):
@@ -81,8 +81,8 @@ class TestPredator(unittest.TestCase):
         mmm.side_effect = 1, 1, 5, 5
         poo.fill(fishes.Victim, 1)
         poo.fill(fishes.Predator, 1)
-        poo._fishes[1].move(poo)
-        self.assertEqual(poo._fishes[1].get_pos(), [3, 3])
+        poo.fishes[1].move(poo)
+        self.assertEqual(poo.fishes[1].get_pos(), [3, 3])
 
     @unittest.mock.patch('random.randint')
     def test_predator_eating(self, mmm):
@@ -91,8 +91,8 @@ class TestPredator(unittest.TestCase):
         mmm.side_effect = 1, 1, 1, 1
         poo.fill(fishes.Predator, 1)
         poo.fill(fishes.Victim, 1)
-        poo._fishes[0].eat(poo)
-        self.assertEqual(len(poo._fishes), 1)
+        poo.fishes[0].eat(poo)
+        self.assertEqual(len(poo.fishes), 1)
 
 
 class TestVictim(unittest.TestCase):

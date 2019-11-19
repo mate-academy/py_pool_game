@@ -20,20 +20,25 @@ class Fish:
         """return position"""
         return self._pos
 
-    def move(self, poo: pool.Pool) -> tuple:
-        '''def'''
+    def move(self, poo):
+        """def"""
         self._life_counter -= 1
-        return self._move(poo), self.place_in_bounds(poo)
+        self._move(poo)
+        self.place_in_bounds(poo)
 
     def is_alive(self):
         """live or dead"""
         return self._life_counter > 0
 
-    def is_victim(self) -> bool:
+    def _move(self, poo: pool.Pool):
+        pass
+
+    @staticmethod
+    def is_victim():
         """victim"""
         return False
 
-    def place_in_bounds(self, poo: list):
+    def place_in_bounds(self, poo):
         """place in bounds"""
         try:
             self._pos[X] = min(max(self._pos[X], 0), poo.get_size()[X] - 1)
@@ -45,6 +50,9 @@ class Fish:
         """born"""
         if random.randint(1, 10) < self._born_rate:
             poo.fill(self.__class__, self._born_num)
+
+    def eat(self, poo: pool.Pool):
+        """DOCSTRING"""
 
 
 class Predator(Fish):
@@ -60,18 +68,14 @@ class Predator(Fish):
         super().__init__(x, y)
         self.__dict__.update(self.state)
 
-    def _move(self, poo=None):
-        if poo is None:
-            poo = []
+    def _move(self, poo):
         self._is_not_hungry -= 1
         victim = poo.get_nearest_victim(*self._pos)
         self._pos[X] += 2 if victim[X] > self._pos[X] else -2
         self._pos[Y] += 2 if victim[Y] > self._pos[Y] else -2
 
-    def eat(self, poo: pool.Pool) -> int:
-        """
-        eat
-        """
+    def eat(self, poo: pool.Pool):
+        """eat"""
         victims = poo.get_victim(self.get_pos())
         if victims:
             self._is_not_hungry += 3
@@ -97,10 +101,12 @@ class Victim(Fish):
         super().__init__(x, y)
         self.__dict__.update(self.state)
 
-    def _move(self, poo: pool.Pool):
+    def _move(self, poo):
         """ move"""
         self._pos[X] += random.randint(-1, 1)
         self._pos[Y] += random.randint(-1, 1)
+        if poo == 0:
+            print(poo)
 
     def __repr__(self):
         """return"""
