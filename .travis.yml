@@ -6,5 +6,5 @@ install:
 script:
   - pytest --cov=pool
   - flake8 .
-  - pylint fishes pool config test_pool main
+  - pylint fishes pool CONFIG test_pool main
   - mypy .
