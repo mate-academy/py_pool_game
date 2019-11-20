@@ -41,7 +41,7 @@ class Fish:
         self._life_counter -= 1
         self._move(p_ppp)
         p_ppp1 = [p_ppp]
-        self.place_in_bounds(p_ppp1)
+        self.place_in_bounds(p_ppp)
         return tuple(p_ppp1)
 
     def is_alive(self):
@@ -65,7 +65,7 @@ class Fish:
           """
         return False
 
-    def place_in_bounds(self, p_ppp: list):
+    def place_in_bounds(self, p_ppp):
         """
           Z name main
           Nain jjk.
@@ -81,7 +81,6 @@ class Fish:
           Z name main
           Nain jjk.
           """
-     #   pass
 
     def born(self, p_ppp: pool.Pool):
         """
@@ -111,7 +110,7 @@ class Predator(Fish):
         super().__init__(x, y)
         self.__dict__.update(self.state)
 
-    def _move(self, p_ppp: pool.Pool = None):
+    def _move(self, p_ppp: pool.Pool):
         """
           Z name main
           Nain jjk.
@@ -130,6 +129,7 @@ class Predator(Fish):
             self._is_not_hungry += 3
             for victim in victims:
                 p_ppp.kill(victim)
+        return victims
 
     def __repr__(self):
         """

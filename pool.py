@@ -3,8 +3,8 @@
   Nain jjk.
 """
 import random
-import config
 import math
+import config
 
 POOL_WIDTH = int(config.CONFIG['Pool']['Width'])
 POOL_HEIGHT = int(config.CONFIG['Pool']['Height'])
@@ -24,12 +24,16 @@ class Pool:
         self._height = POOL_HEIGHT
         self._fishes = []
 
-    def get_size(pool):
+    def get_fishes(self):
+        """function docstring"""
+        return self._fishes
+
+    def get_size(self):
         """
           Z name main
           Nain jjk.
           """
-        return pool._width, pool._height
+        return self._width, self._height
 
     def fill(self, fish_type, number: int):
         """
@@ -40,20 +44,19 @@ class Pool:
                                    random.randint(0, self._height - 1))
                          for _ in range(number)]
 
-
     def __str__(self):
         """
           Z name main
           Nain jjk.
           """
-        s = '+' + '-'*self._width + '+\n'
-        p = [[' ']*self._width for _ in range(self._height)]
+        s_ss = '+' + '-' * self._width + '+\n'
+        p_pp = [[' '] * self._width for _ in range(self._height)]
         for fish in self._fishes:
-            p[fish.get_pos()[0]][fish.get_pos()[1]] = repr(fish)
-        for row in p:
-            s += '|' + ''.join(row) + '|\n'
-        s += '+' + '-'*self._width + '+\n'
-        return s
+            p_pp[fish.get_pos()[0]][fish.get_pos()[1]] = repr(fish)
+        for row in p_pp:
+            s_ss += '|' + ''.join(row) + '|\n'
+        s_ss += '+' + '-' * self._width + '+\n'
+        return s_ss
 
     def tick(self):
         """
@@ -67,11 +70,11 @@ class Pool:
         for fish in self._fishes.copy():
             if not fish.is_alive():
                 self.kill(fish)
-        else:
-            for fish in self._fishes.copy():
-                fish.born(self)
+        # else:
+            # for fish in self._fishes.copy():
+            #    fish.born(self)
 
-    def get_nearest_victim(self, x, y):
+    def get_nearest_victim(self, x_xx, y_yy):
         """
           Z name main
           Nain jjk.
@@ -81,8 +84,9 @@ class Pool:
 
         if not nearest_victims:
             return (0, 0)
-        return tuple(min(nearest_victims, key=lambda f: math.hypot(f[0] - x,
-                                                                   f[1] - y)))
+        return tuple(min(nearest_victims, key=lambda f: math.hypot(f[0] - x_xx,
+                                                                   f[1] - y_yy)
+                         ))
 
     def get_victim(self, pos):
         """

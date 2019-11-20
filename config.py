@@ -4,8 +4,6 @@
 """
 import configparser
 
-
-
 CONFIG = configparser.ConfigParser()
 CONFIG.read('pool.ini')
 

@@ -17,14 +17,14 @@ class TestPool(unittest.TestCase):
           Z name main
           Nain jjk.
           """
-        self.p = pool.Pool()
+        self.p_ppp = pool.Pool()
 
     def test_pool(self):
         """
           Z name main
           Nain jjk.
           """
-        self.assertEqual(self.p.get_size(), (20, 20),
+        self.assertEqual(self.p_ppp.get_size(), (20, 20),
                          "Pool size doesn't equal 20x20")
 
     def test_fill_predators(self):
@@ -32,48 +32,50 @@ class TestPool(unittest.TestCase):
           Z name main
           Nain jjk.
           """
-        PREDATORS_QUANTITY = 3
-        Length = len(self.p._fishes)
-        self.p.fill(fishes.Predator, PREDATORS_QUANTITY)
-        self.assertEqual(len(self.p._fishes), Length + PREDATORS_QUANTITY)
+        predators_quantity = 3
+        length = len(self.p_ppp.get_fishes())
+        self.p_ppp.fill(fishes.Predator, predators_quantity)
+        self.assertEqual(len(self.p_ppp.get_fishes()),
+                         length + predators_quantity)
 
     @unittest.mock.patch('random.randint')
-    def test_fill_predators_random(self, m):
+    def test_fill_predators_random(self, m_mmm):
         """
           Z name main
           Nain jjk.
           """
-        m.side_effect = 0, 1
-        self.p.fill(fishes.Predator, 1)
-        self.assertEqual(self.p._fishes[0].get_pos(), [0, 1])
+        m_mmm.side_effect = 0, 1
+        self.p_ppp.fill(fishes.Predator, 1)
+        self.assertEqual(self.p_ppp.get_fishes()[0].get_pos(), [0, 1])
 
     @unittest.mock.patch('random.randint')
-    def test_nearest_victim(self, m):
+    def test_nearest_victim(self, m_mmm):
         """
           Z name main
           Nain jjk.
           """
-        m.side_effect = 1, 1, 5, 5, 9, 0
-        self.p.fill(fishes.Victim, 3)
-        self.assertEqual(self.p.get_nearest_victim(2, 2), (1, 1))
-        self.assertEqual(self.p.get_nearest_victim(8, 1), (9, 0))
+        m_mmm.side_effect = 1, 1, 5, 5, 9, 0
+        self.p_ppp.fill(fishes.Victim, 3)
+        self.assertEqual(self.p_ppp.get_nearest_victim(2, 2), (1, 1))
+        self.assertEqual(self.p_ppp.get_nearest_victim(8, 1), (9, 0))
 
     @unittest.mock.patch('random.randint')
-    def test_get_victim(self, m):
+    def test_get_victim(self, m_mmm):
         """
           Z name main
           Nain jjk.
           """
-        m.side_effect = 1, 1
-        self.p.fill(fishes.Victim, 1)
-        self.assertEqual(self.p.get_victim([1, 1]), [self.p._fishes[0]])
+        m_mmm.side_effect = 1, 1
+        self.p_ppp.fill(fishes.Victim, 1)
+        self.assertEqual(self.p_ppp.get_victim([1, 1]),
+                         [self.p_ppp.get_fishes()[0]])
 
-    def tearDown(self) -> None:
-        """
-          Z name main
-          Nain jjk.
-          """
-        pass
+    # def tearDown(self) -> None:
+        # """
+        # Z name main
+        # Nain jjk.
+        # """
+        # pass
 
 
 class TestFish(unittest.TestCase):
@@ -86,18 +88,18 @@ class TestFish(unittest.TestCase):
           Z name main
           Nain jjk.
           """
-        vc = fishes.Fish(-1, -1)
-        vc.place_in_bounds(pool.Pool())
-        self.assertEqual(vc.get_pos(), [0, 0])
+        v_c = fishes.Fish(-1, -1)
+        v_c.place_in_bounds(pool.Pool())
+        self.assertEqual(v_c.get_pos(), [0, 0])
 
     def test_fish_is_in_bounds2(self):
         """
           Z name main
           Nain jjk.
           """
-        vc = fishes.Fish(20, 20)
-        vc.place_in_bounds(pool.Pool())
-        self.assertEqual(vc.get_pos(), [19, 19])
+        v_c = fishes.Fish(20, 20)
+        v_c.place_in_bounds(pool.Pool())
+        self.assertEqual(v_c.get_pos(), [19, 19])
 
 
 class TestPredator(unittest.TestCase):
@@ -110,42 +112,42 @@ class TestPredator(unittest.TestCase):
           Z name main
           Nain jjk.
           """
-        pr = fishes.Predator(2, 3)
-        self.assertEqual(repr(pr), 'P')
+        p_r = fishes.Predator(2, 3)
+        self.assertEqual(repr(p_r), 'P')
 
     def test_predator_pos(self):
         """
           Z name main
           Nain jjk.
           """
-        pr = fishes.Predator(2, 3)
-        self.assertEqual(pr.get_pos(), [2, 3])
+        p_r = fishes.Predator(2, 3)
+        self.assertEqual(p_r.get_pos(), [2, 3])
 
     @unittest.mock.patch('random.randint')
-    def test_predator_move(self, m):
+    def test_predator_move(self, m_mmm):
         """
           Z name main
           Nain jjk.
           """
-        p = pool.Pool()
-        m.side_effect = 1, 1, 5, 5
-        p.fill(fishes.Victim, 1)
-        p.fill(fishes.Predator, 1)
-        p._fishes[1].move(p)
-        self.assertEqual(p._fishes[1].get_pos(), [3, 3])
+        p_ppp = pool.Pool()
+        m_mmm.side_effect = 1, 1, 5, 5
+        p_ppp.fill(fishes.Victim, 1)
+        p_ppp.fill(fishes.Predator, 1)
+        p_ppp.get_fishes()[1].move(p_ppp)
+        self.assertEqual(p_ppp.get_fishes()[1].get_pos(), [3, 3])
 
     @unittest.mock.patch('random.randint')
-    def test_predator_eating(self, m):
+    def test_predator_eating(self, m_mmm):
         """
           Z name main
           Nain jjk.
           """
-        p = pool.Pool()
-        m.side_effect = 1, 1, 1, 1
-        p.fill(fishes.Predator, 1)
-        p.fill(fishes.Victim, 1)
-        p._fishes[0].eat(p)
-        self.assertEqual(len(p._fishes), 1)
+        p_ppp = pool.Pool()
+        m_mmm.side_effect = 1, 1, 1, 1
+        p_ppp.fill(fishes.Predator, 1)
+        p_ppp.fill(fishes.Victim, 1)
+        p_ppp.get_fishes()[0].eat(p_ppp)
+        self.assertEqual(len(p_ppp.get_fishes()), 1)
 
 
 class TestVictim(unittest.TestCase):
@@ -158,24 +160,24 @@ class TestVictim(unittest.TestCase):
           Z name main
           Nain jjk.
           """
-        vc = fishes.Victim(2, 3)
-        self.assertEqual(repr(vc), 'V')
+        v_c = fishes.Victim(2, 3)
+        self.assertEqual(repr(v_c), 'V')
 
     def test_victim_pos(self):
         """
           Z name main
           Nain jjk.
           """
-        vc = fishes.Victim(2, 3)
-        self.assertEqual(vc.get_pos(), [2, 3])
+        v_c = fishes.Victim(2, 3)
+        self.assertEqual(v_c.get_pos(), [2, 3])
 
     @unittest.mock.patch('random.randint')
-    def test_victim_correct_move(self, m):
+    def test_victim_correct_move(self, m_mmm):
         """
           Z name main
           Nain jjk.
           """
-        vc = fishes.Victim(2, 3)
-        m.side_effect = 1, 1
-        vc.move(pool.Pool())
-        self.assertEqual(vc.get_pos(), [3, 4])
+        v_c = fishes.Victim(2, 3)
+        m_mmm.side_effect = 1, 1
+        v_c.move(pool.Pool())
+        self.assertEqual(v_c.get_pos(), [3, 4])
