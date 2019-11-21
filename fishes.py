@@ -62,8 +62,12 @@ class Fish:
         :return:
         """
         try:
-            self._pos[X] = min(max(self._pos[X], 0), filled_pool.get_size()[X] - 1)
-            self._pos[Y] = min(max(self._pos[Y], 0), filled_pool.get_size()[Y] - 1)
+            self._pos[X] = min(
+                max(self._pos[X], 0), filled_pool.get_size()[X] - 1
+            )
+            self._pos[Y] = min(
+                max(self._pos[Y], 0), filled_pool.get_size()[Y] - 1
+            )
         except ValueError:
             print("Oooops!")
 
@@ -163,8 +167,6 @@ class Victim(Fish):
         :return:
         """
         return "V"
-
-    is_victim = lambda self: True
 
 
 class Pick(Predator):

@@ -1,6 +1,8 @@
 """
 s
 """
+
+
 def is_victim(fish):
     """
 

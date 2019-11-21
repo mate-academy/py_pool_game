@@ -52,8 +52,6 @@ class Pool:
             random.randint(0, self._height - 1)
         ) for _ in range(number)]
 
-
-
     def __str__(self):
         """
 
@@ -92,10 +90,17 @@ class Pool:
         :param y_pos:
         :return:
         """
-        nearest_victims = [fish.get_pos() for fish in self._fishes if is_victim(fish)]
+        nearest_victims = [
+            fish.get_pos() for fish in self._fishes if is_victim(fish)
+        ]
         if not nearest_victims:
             return (0, 0)
-        return tuple(min(nearest_victims, key=lambda f: math.hypot(f[0] - x_pos, f[1] - y_pos)))
+        return tuple(
+            min(
+                nearest_victims,
+                key=lambda f: math.hypot(f[0] - x_pos, f[1] - y_pos)
+            )
+        )
 
     def get_victim(self, pos):
         """
@@ -103,7 +108,11 @@ class Pool:
         :param pos:
         :return:
         """
-        return [fish for fish in self._fishes if fish.get_pos() == pos and is_victim(fish)]
+        return [
+            fish
+            for fish in self._fishes
+            if fish.get_pos() == pos and is_victim(fish)
+        ]
 
     def kill(self, victim):
         """

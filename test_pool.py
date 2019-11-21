@@ -24,7 +24,9 @@ class TestPool(unittest.TestCase):
 
         :return:
         """
-        self.assertEqual(self.pool.get_size(), (20, 20), "Pool size doesn't equal 10x10")
+        self.assertEqual(
+            self.pool.get_size(), (20, 20), "Pool size doesn't equal 10x10"
+        )
 
     def test_fill_predators(self):
         """
