@@ -1,9 +1,13 @@
+"""configuration"""
+
+
 import configparser
 
 
-config = configparser.ConfigParser()
-config.read('pool.ini')
+CONFIG = configparser.ConfigParser()
+CONFIG.read('pool.ini')
 
 
 def get_ticks():
-    return int(config['App']['Ticks'])
+    """return tickets"""
+    return int(CONFIG['App']['Ticks'])
